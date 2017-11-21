@@ -85,7 +85,7 @@ func (uuid *UUID) Bin() [16]byte {
 	return uuid.bin
 }
 
-// Bin returns the hex-string representation of a given UUID.
+// Hex returns the hex-string representation of a given UUID.
 func (uuid *UUID) Hex() string {
 	if uuid == nil {
 		return ""
@@ -188,8 +188,7 @@ func (uuid *UUID) Scan(src interface{}) error {
 }
 
 // New generates a new UUID and sets its scope to the one provided as an argument.
-// If the scope doesn't exist yet, it will automatically create a new one and then generates the UUID.
-// Should the limit of allowed types be exeeded by adding the scope (limit is 64), an error is returned.
+// If the scope doesn't exist yet, it will return an error (see SetScopes function).
 func New(scope string) (*UUID, error) {
 	var (
 		uuid UUID
