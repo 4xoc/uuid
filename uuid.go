@@ -104,10 +104,6 @@ func (uuid *UUID) ScopeMatches(scopes []string) bool {
 		index int
 	)
 
-	if uuid.scope == "" {
-		return false
-	}
-
 	for index = range scopes {
 		if uuid.scope == scopes[index] {
 			return true
