@@ -261,14 +261,15 @@ func Scopes() [64]string {
 // also be used for creating new UUIDs.
 func SetScopes(newScopes [64]string) {
 	var (
-		index int
+		index  int
+		tmpMap map[string]*byte
 	)
 
-	if setScopes == nil {
-		setScopes = make(map[string]*byte)
-	}
+	tmpMap = make(map[string]*byte)
 
 	for index = 0; index < 64; index++ {
-		setScopes[newScopes[index]] = &scopes[index]
+		tmpMap[newScopes[index]] = &scopes[index]
 	}
+
+	setScopes = tmpMap
 }

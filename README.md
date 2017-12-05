@@ -3,6 +3,9 @@
 This package provides functionality to generate random UUIDs with unique identification of its type within. Any UUID is randomly generated (version 4 UUID) but has certain bits set to identify exactly the 'type' is is refering to. This package does **NOT** generate UUIDs following RFC 4122. However, it nevertheless allows for exactly the same number of possible combinations (ignoring the type bits) which is 2^122 UUIDs **for each type**.
 UUID also has no 3rd party dependencies meaning that out-of-the-box just golang is needed.
 
+## Open Issues
+- no safe sync in place for concurrent read/write of scopes map
+
 ## Types and UUID Structure
 Generally referred to as 'types' is the combination of the first 6 (most-significant) bits that basically set a group of UUIDs each belongs to. If you for example want to generate UUIDs for users, then the type could be `0x00` or `000000` in binary. Each user UUID will therefore always start with `00` in the hex-string identifying it easily as a user UUID.
 
