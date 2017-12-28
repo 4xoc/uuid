@@ -4,7 +4,7 @@ This package provides functionality to generate random UUIDs with unique identif
 UUID also has no 3rd party dependencies meaning that out-of-the-box just golang is needed.
 
 ## Open Issues
-- no safe sync in place for concurrent read/write of scopes map
+*none*
 
 ## Types and UUID Structure
 Generally referred to as 'types' is the combination of the first 6 (most-significant) bits that basically set a group of UUIDs each belongs to. If you for example want to generate UUIDs for users, then the type could be `0x00` or `000000` in binary. Each user UUID will therefore always start with `00` in the hex-string identifying it easily as a user UUID.
@@ -72,6 +72,9 @@ This package implements the `database/sql/driver` interfaces to give Golang's bu
 ## FAQ
 **Dude, why do I always need to call a function to just get a value?**  
 All fields of the struct are not directly accessable to prevent problems with manual changes bin/scope/hex data that would either cause a panic or at least become unpredictable in its workings. Therefore only interfaces allow the access to actual values so that a change of any data always also updates the other (if necessary).
+
+**Is it safe to use concurrent actions like read/write**
+Yes, but by design it is only possible to set the scope once.
 
 ## Contribution
 Anyone feel happy to get involved and respond to issues or simply create a PR.

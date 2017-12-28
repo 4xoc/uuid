@@ -32,6 +32,7 @@ const (
 	ErrorOutOfScopes       string = "Limit of scopes exeeded."
 	ErrorMalformattedHex   string = "The Hex representation of the UUID is malformatted."
 	ErrorUninitializedUUID string = "The provided pointer refers to an uninitialized struct."
+	ErrorScopesAlreadySet  string = "Scopes can only be set once."
 )
 
 var (
@@ -256,14 +257,18 @@ func Scopes() [64]string {
 	return scopes
 }
 
-// setScopes defines the scopes used within this package and its binary representation. The array provided
-// _*must*_ never change in order or existing UUIDs will break! Only scopes defined via this function can
-// also be used for creating new UUIDs.
-func SetScopes(newScopes [64]string) {
+// setScopes defines the scopes used within this package and its binary representation. This function can
+// only set scopes when there aren't any configured yet. A dynamic update is not supported for the sake
+// of preventing concurrency issues without compromising performance.
+func SetScopes(newScopes [64]string) error {
 	var (
 		index  int
 		tmpMap map[string]*byte
 	)
+
+	if setScopes != nil {
+		return errors.New(ErrorScopesAlreadySet)
+	}
 
 	tmpMap = make(map[string]*byte)
 
@@ -272,4 +277,5 @@ func SetScopes(newScopes [64]string) {
 	}
 
 	setScopes = tmpMap
+	return nil
 }

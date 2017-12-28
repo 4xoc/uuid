@@ -22,7 +22,11 @@ func TestMain(t *testing.T) {
 
 	//setting scopes
 	myScopes = [64]string{"one", "two", "three", "four", "five", "six", "seven", "eight"}
-	uuid.SetScopes(myScopes)
+	err = uuid.SetScopes(myScopes)
+
+	if err != nil {
+		t.Error("scopes should have been set")
+	}
 
 	//getting scopes
 	mySetScopes = uuid.Scopes()
@@ -88,10 +92,14 @@ func TestMain(t *testing.T) {
 
 	//now setting new set of scopes
 	myScopes = [64]string{"one"}
-	uuid.SetScopes(myScopes)
+	err = uuid.SetScopes(myScopes)
+
+	if err == nil {
+		t.Error("setting new scopes should not have been possible")
+	}
 
 	//reading a previously valid UUID which now has an unknown scope
-	_, err = uuid.Read(myUUID.Hex())
+	_, err = uuid.Read("ff8cb1d0-84f3-9d8d-76cc-682d1ca34dae")
 
 	if err == nil {
 		t.Error("UUID shouldn't have been generated")
