@@ -26,13 +26,13 @@ type UUID struct {
 
 const (
 	// Errors
-	ErrorMissingScope      string = "The provided scope is not known."
-	ErrorBadScope          string = "The provided scope is not supported."
-	ErrorBadString         string = "The provided string is not a UUID."
-	ErrorOutOfScopes       string = "Limit of scopes exeeded."
-	ErrorMalformattedHex   string = "The Hex representation of the UUID is malformatted."
-	ErrorUninitializedUUID string = "The provided pointer refers to an uninitialized struct."
-	ErrorScopesAlreadySet  string = "Scopes can only be set once."
+	ErrorMissingScope      string = "the provided scope is not known"
+	ErrorBadScope          string = "the provided scope is not supported"
+	ErrorBadString         string = "the provided string is not a UUID"
+	ErrorOutOfScopes       string = "limit of scopes exeeded"
+	ErrorMalformattedHex   string = "the Hex representation of the UUID is malformatted"
+	ErrorUninitializedUUID string = "the provided pointer refers to an uninitialized struct"
+	ErrorScopesAlreadySet  string = "scopes can only be set once"
 )
 
 var (
